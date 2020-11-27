@@ -1,0 +1,25 @@
+D:\blog\node-blog
+├─app.js
+├─package.json
+├─src
+|  ├─util
+|  |  └log.js
+|  ├─router
+|  |   ├─blog.js
+|  |   └user.js
+|  ├─model
+|  |   └resModel.js
+|  ├─db
+|  | ├─mysql.js
+|  | └redis.js
+|  ├─controller
+|  |     ├─blog.js
+|  |     └user.js
+|  ├─conf
+|  |  └db.js
+├─logs
+|  ├─access.log
+|  ├─error.log
+|  └event.log
+├─bin
+|  └www.js
