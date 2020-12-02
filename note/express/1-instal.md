@@ -123,3 +123,80 @@ app.use((req,res,next)=>{
     next()
 })
 ```
+
+注意没有 next函数，上面的请求不会往下执行。
+
+比如一个 GET 请求，之前会先执行上面的 app.use。
+
+这实例是中用请求访问 `/blog/list` 接口是三个 **use 会执行执行**，第三个不满足条件。三个use用 next 函数连接的，一直到最后一个 use 返回。
+
+```js
+app.use((req,res,next)=>{
+    console..log('hi')
+    next()
+})
+app.use('/blog',(req,res,next)=>{
+    console..log('hi hi')
+    next()
+})
+
+// 这个use get请求访问 /blog/list 不会执行
+app.use('/new',(req,res,next)=>{
+    console..log('hi hi')
+    next()
+})
+
+app.use('/blog/list',(req,res,next)=>{
+    res.json({
+        msg: "ok"
+    })
+})
+```
+
+这就相当于中间件，在请求发来之后，服务器向给用户发送数据之前执行。
+
+还需要**注意**的是，中间件可以是**异步的**，异步处理完才执行下一个函数。也可以将函数直接嵌入get中使用
+
+```js
+function login(req,res,next){
+	setTimeou(()=>{
+        console.log('异步执行')
+        next()
+    },5000)
+}
+// 这里嵌入了login函数， 5s后返回数据
+app.get('/blog/list',login,(req,res,next)=>{
+    res.json({
+        msg: "ok"
+    })
+})
+```
+
+### 6. express总结
+
+- 插件的作用
+- 如何处理路由
+- 中间件的作用
+
+#### 7. 注意事项
+
+**特别要注意** app.js 文件夹中的代码循序，存放循序是：
+
+```js
+// 先引入 
+var express = require('express');
+
+// 创建实例
+var app = express();
+
+// 中间件
+app.use(session());
+
+// 注册路由
+app.use('/', indexRouter);
+```
+
+要严格按照以上循序存放，不然会报错，比如中间件放在**路由后面中间件不会生效**。
+
+
+
