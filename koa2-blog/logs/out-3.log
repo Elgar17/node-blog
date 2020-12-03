@@ -1,0 +1,32 @@
+  <-- GET /api/blog/detail?id=15
+15
+GET /api/blog/detail?id=15 - 25ms
+  --> GET /api/blog/detail?id=15 200 44ms 119b
+  <-- GET /api/blog/detail?id=9
+9
+GET /api/blog/detail?id=9 - 3ms
+  --> GET /api/blog/detail?id=9 200 8ms 368b
+  <-- GET /api/blog/list
+ 
+GET /api/blog/list - 73ms
+  --> GET /api/blog/list 200 133ms 1.32kb
+  <-- GET /api/blog/list
+ 
+GET /api/blog/list - 3ms
+  --> GET /api/blog/list 200 5ms 1.32kb
+  <-- GET /api/blog/list
+ 
+GET /api/blog/list - 2ms
+  --> GET /api/blog/list 200 4ms 1.32kb
+  <-- GET /api/blog/list
+ 
+GET /api/blog/list - 3ms
+  --> GET /api/blog/list 200 7ms 1.32kb
+  <-- GET /api/blog/list
+ 
+GET /api/blog/list - 36ms
+  --> GET /api/blog/list 200 47ms 1.32kb
+  <-- GET /api/blog/list
+ 
+GET /api/blog/list - 4ms
+  --> GET /api/blog/list 200 16ms 1.32kb

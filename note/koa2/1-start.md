@@ -129,3 +129,16 @@ npm i xss mysql --save
 
 
 
+### 6. 日志
+
+安装插件
+
+```bash
+npm i koa2-morgan --save
+```
+
+### 7. 中间件
+
+中间的使用
+
+洋葱

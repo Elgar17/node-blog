@@ -3,7 +3,7 @@ const {
 } = require('../model/resModel')
 
 async function loginCheck(ctx, next) {
-    if (req.session.username) {
+    if (ctx.session.username) {
         await next()
         return
     }

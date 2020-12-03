@@ -47,7 +47,7 @@ router.get('/detial', (req, res, next) => {
 });
 
 router.post('/update', loginCheck,(req, res, next) => {
-    console.log(req.body.id,req.body)
+
     updateBlog(req.body.id,req.body)
     .then(data=>{
         if(data){

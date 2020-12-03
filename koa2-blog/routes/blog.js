@@ -12,11 +12,13 @@ const {
 } = require('../model/resModel')
 router.prefix('/api/blog')
 
+const loginCheck = require('../middleware/loginCheck')
+const { context } = require('../app')
 
 // 列表
 router.get('/list', async function (ctx, next) {
     let author = ctx.author || ''
-    let keyword =ctx.keyword || ''
+    let keyword = ctx.query.keyword || ''
     if (ctx.query.isadmin) {
         if (ctx.session.username == null) {
             ctx.body = new ErrorModel('未登录')
@@ -24,31 +26,50 @@ router.get('/list', async function (ctx, next) {
         }
         author = ctx.session.username
     }
-    var data = await getList(author,keyword)
+    console.log(author,keyword)
+    var data = await getList(author, keyword)
     ctx.body = new SuccessModel(data)
-    
+
 })
 
 // 详情
-router.get('/detail',async function (ctx, next) {
+router.get('/detail', async function (ctx, next) {
+    console.log(ctx.query.id)
     var id = ctx.query.id
-    let detail = await getDetial(id)
-    ctx.body = new SuccessModel(detail)
+    let deta = await getDetial(id)
+    ctx.body = new SuccessModel(deta)
 })
 
 // 新建博客
-router.post('/new',async function (ctx, next) {
-    ctx.body = 'this is a users/bar response'
+router.post('/new', loginCheck, async function (ctx, next) {
+    let body = ctx.request.body
+    body.author = ctx.session.username;
+    let data = await newBlog(body)
+    ctx.body = new SuccessModel(data)
 })
 
 // 更新博客
-router.post('/update', function (ctx, next) {
-    ctx.body = 'this is a users/bar response'
+router.post('/update', loginCheck, function (ctx, next) {
+    let data = updateBlog(ctx.request.body.id, ctx.request.body)
+    if (data) {
+        ctx.body = new SuccessModel('更新成功')
+    } else {
+        ctx.body = new ErrorModel('更新失败')
+    }
+
+
 })
 
 // 删除博客
-router.post('/del', function (ctx, next) {
-    ctx.body = 'this is a users/bar response'
+router.post('/del', loginCheck, async function (ctx, next) {
+    let id = ctx.request.body.id
+    let aothor = ctx.session.username
+    let data = await delBlog(id, aothor)
+    if (data) {
+        ctx.body = new SuccessModel("删除成功")
+    } else {
+        ctx.body = new ErrorModel("删除失败")
+    }
 })
 
 module.exports = router
