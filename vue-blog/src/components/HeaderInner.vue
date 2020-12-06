@@ -9,7 +9,8 @@
       </nav>
       <el-drawer
         title="我是标题"
-        direction="lrt"
+        direction="ltr"
+        size='50%'
         :with-header="false"
         :visible.sync="drawer"
       >
@@ -56,6 +57,7 @@ export default {
   data() {
     return {
       drawer: false,
+      input: ""
     };
   },
 };

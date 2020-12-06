@@ -45,18 +45,12 @@
           </ul>
         </div>
       </aside>
-      
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "Home",
-  components: {
-    // HelloWorld,
-  },
-};
+export default {};
 </script>
 
 <style lang="less" scoped>
