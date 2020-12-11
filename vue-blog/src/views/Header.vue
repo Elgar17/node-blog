@@ -2,7 +2,7 @@
   <header>
     <div class="banner"></div>
     <h1>
-      <a href="" class="logo">Elgarblogic</a>
+      <a href="" class="logo">ELGAR'S BLOG</a>
     </h1>
   </header>
 </template>
@@ -13,6 +13,11 @@ export default {};
 
 <style lang="less" scoped>
 
+@font-face {
+	font-family: pso;
+	src: url('../../public/font/pso.ttf');
+}
+
 header {
   position: relative;
   height: 300px;
@@ -22,10 +27,11 @@ header {
     width: 100%;
     background: url(../assets/img/bg1.png);
     background-size: cover;
-    // z-index: 10000;
   }
   h1 {
+    font-family: pso;
     position: absolute;
+    color: #fff;
     width: 100%;
     top: 45%;
     margin: 0;

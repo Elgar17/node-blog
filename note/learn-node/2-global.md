@@ -74,7 +74,11 @@ console.log('开始')
 
 #### 3. 模块化系统
 
-模块化是指将一个很多的代码拆分成多多个
+模块化是指将一个很多的代码拆分成多多个模块。
+
+![](../../img/require.png)
+
+体重第一句是在文件 `app.js`中引入 `a.js`的文件，用 `add` 变量来接受。
 
 Node 的模块化是基于 Common.js 规范。
 
@@ -88,7 +92,7 @@ function add(x,y){
 function mul(x,y){
     return a * b
 }
-// 输出
+// 外部需要使用的函数需要输出
 module.exports = {
     add,
     mul

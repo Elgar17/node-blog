@@ -8,7 +8,7 @@ Node.js 是可以运行 JavaScript 语言环境。
 
 ### 2、有什么用？
 
-用 Node.js 可以**读写文件**、可以发送**网络请求**、操作**数据库**、**摄像头**等等。
+Node.js 可以**读写文件**、可以发送**网络请求**、操作**数据库**、**摄像头**等等。
 
 所以可以用于网页的后端，爬虫、桌面应用程序（Electron）。
 
@@ -31,6 +31,8 @@ node -v
 
 如果报错，可能需要**配置环境**变量。
 
+![node-v](../../img/node-v.gif)
+
 在 cmd 输入 `node` 即可进入 Node.js 运行环境，之后输入执行的程序，按下 `Enter` 即可运行。
 
 ```js
@@ -39,6 +41,8 @@ console.log('Hello NodeJS!')
 ```
 
 这个相当于浏览器的控制台。
+
+![](../../img/node-hello.gif)
 
 这样运行显然不行，我们需要运行 js 文件。
 
@@ -55,3 +59,6 @@ console.log('Hello NodeJS!')
 node .\hello.js
 // 控制台会输出：Hello NodeJS!
 ```
+
+{[(*hello*)]}
+
