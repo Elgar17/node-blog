@@ -24,6 +24,8 @@ console.log(__filename)
 // D:\blog\blog-vp\app.js
 ```
 
+![node-path](../../img/node-path.gif)
+
 #### 2. Event loop
 
 Event loop 也叫事件循环，Node.js 是基于 chrome V8 引擎开发的的，所以 Node.js 也是单线程的，不过事件循环跟浏览器有一点差别。

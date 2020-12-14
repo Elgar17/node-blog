@@ -29,9 +29,11 @@ node -v
 // 返回版本说明安装成功像这样 v12.11.1
 ```
 
-如果报错，可能需要**配置环境**变量。
+
 
 ![node-v](../../img/node-v.gif)
+
+如果报错，可能需要**配置环境**变量。
 
 在 cmd 输入 `node` 即可进入 Node.js 运行环境，之后输入执行的程序，按下 `Enter` 即可运行。
 
@@ -45,6 +47,8 @@ console.log('Hello NodeJS!')
 ![](../../img/node-hello.gif)
 
 这样运行显然不行，我们需要运行 js 文件。
+
+
 
 这里推荐 vscode 编辑器，怎么运行 js 文件呢？
 
@@ -60,5 +64,5 @@ node .\hello.js
 // 控制台会输出：Hello NodeJS!
 ```
 
-{[(*hello*)]}
+![hello-node-vscode](../../img/node-vscode-hello.gif)
 
