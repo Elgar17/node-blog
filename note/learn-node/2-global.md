@@ -72,7 +72,7 @@ console.log('开始')
 // 这是 setImmediate
 ```
 
-
+![Event loop](../../img/node-loop.gif)
 
 #### 3. 模块化系统
 
