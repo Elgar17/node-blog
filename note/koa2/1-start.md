@@ -80,8 +80,6 @@ npm install
 npm run dev
 ```
 
-
-
 安装 cross-env
 
 ```bash
@@ -141,4 +139,4 @@ npm i koa2-morgan --save
 
 中间的使用
 
-洋葱
+洋葱模型
