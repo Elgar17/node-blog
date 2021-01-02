@@ -21,6 +21,9 @@
 <img src="./img/pro.png" alt="node-blog" style="zoom: 67%;" />
 
 
+| 博客页面 | 后台管理页面 |
+|---|---|
+|![前端](./img/vue-blog.png)||
 
 
 

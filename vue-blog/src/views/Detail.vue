@@ -4,33 +4,13 @@
       <section id="main">
         <article class="article">
           <div class="article-inner">
-            <h2>hello world</h2>
-            <div class="article-meta">分类：技术 | 2020-12-04</div>
-            <div class="content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              nemo obcaecati praesentium fugiat iure eum error atque consectetur
-              quo necessitatibus neque laboriosam, distinctio a nostrum
-              quibusdam? Unde modi incidunt quasi.
+            <h2>{{ blog1.title }}</h2>
+            <div class="article-meta">
+              更新时间：{{ blog1.time }} | 作者：{{ blog1.au }}
             </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error inventore, facere quae quaerat totam odit assumenda ratione officia quasi beatae, magni tempore quibusdam blanditiis. Minus asperiores dicta itaque corporis pariatur.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem nulla nostrum, dolor blanditiis qui accusantium adipisci, veniam, dicta eligendi iste alias quisquam! Vitae ex cum aliquid, corrupti illo molestias sed..</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis quam ea ex voluptatem sed expedita eveniet, praesentium, perferendis laboriosam reprehenderit sapiente odit? Ipsum, ex laboriosam recusandae quasi similique sit cumque.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam distinctio ipsum vel, ipsam unde officia consectetur repellendus, nemo harum suscipit impedit. Quaerat adipisci omnis repellendus. Optio ex quam amet voluptatem!</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et explicabo unde temporibus harum voluptatem incidunt illo atque sequi, voluptatum exercitationem quasi laborum optio ratione. Earum molestiae optio quisquam praesentium vel.</p>
-
+            <div class="content">{{ blog1.con }}</div>
           </div>
         </article>
-
       </section>
 
       <!-- 侧边栏 -->
@@ -55,7 +35,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Detail",
+  data() {
+    return {
+    };
+  },
+  computed: {
+    blog1(){
+      return this.$route.params.data;
+    }
+  },
+  methods: {},
+
+  watch: {},
+};
 </script>
 
 <style lang="less" scoped>

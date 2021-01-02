@@ -15,29 +15,21 @@
         :visible.sync="drawer"
       >
         <div class="m-nav">
-          <router-link tag="a" to="/" href="">主页</router-link>
+          <router-link tag="div" to="/" href="">主页</router-link>
         </div>
         <div class="m-nav">
-          <router-link tag="a" to="/about" href="">归档</router-link>
-        </div>
-        <div class="m-nav">
-          <router-link tag="a" to="/about" href="">想法与感想</router-link>
-        </div>
-        <div class="m-nav">
-          <router-link tag="a" to="/about" href="">技术博客</router-link>
+          <router-link tag="div" to="/about" href="">关于</router-link>
         </div>
       </el-drawer>
       <!-- 电脑屏幕显示 -->
       <nav class="main-nav">
         <router-link tag="a" to="/" href="">主页</router-link>
-        <router-link tag="a" to="/about" href="">归档</router-link>
-        <router-link tag="a" to="/about" href="">想法与感想</router-link>
-        <router-link tag="a" to="/about" href="">技术博客</router-link>
+        <router-link tag="a" to="/about" href="">关于</router-link>
       </nav>
       <nav class="sub-nav">
-        <a href=""><i class="el-icon-moon"></i></a>
+        <!-- <a href=""><i class="el-icon-moon"></i></a> -->
         <!-- el-icon-sunny -->
-        <a href=""><i class="el-icon-share"></i></a>
+        <!-- <a href=""><i class="el-icon-share"></i></a> -->
       </nav>
       <nav class="search-nav">
         <el-input

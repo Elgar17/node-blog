@@ -2,28 +2,26 @@
   <div class="home">
     <div class="outer">
       <section id="main">
-        <article class="article">
+        <article class="article" v-for="item in list" :key="item.id">
           <div class="article-inner">
-            <h2>hello world</h2>
-            <div class="article-meta">分类：技术 | 2020-12-04</div>
-            <div class="content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              nemo obcaecati praesentium fugiat iure eum error atque consectetur
-              quo necessitatibus neque laboriosam, distinctio a nostrum
-              quibusdam? Unde modi incidunt quasi.
+            <h2>
+              <a
+                @click="
+                  todetail({
+                    title: item.title,
+                    time: time(item.createtime),
+                    con: item.content,
+                    au: item.author,
+                    id: item.id
+                  })
+                "
+                >{{ item.title }}</a
+              >
+            </h2>
+            <div class="article-meta">
+              分类：技术 | {{ time(item.createtime) }}
             </div>
-          </div>
-        </article>
-        <article class="article">
-          <div class="article-inner">
-            <h2>hello world</h2>
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-              nemo obcaecati praesentium fugiat iure eum error atque consectetur
-              quo necessitatibus neque laboriosam, distinctio a nostrum
-              quibusdam? Unde modi incidunt quasi.
-            </div>
-            <div class="article-meta">分类：感想 | 2020-12-04</div>
+            <div class="content">{{ item.content }}</div>
           </div>
         </article>
       </section>
@@ -33,19 +31,20 @@
         <div class="widget-wrap">
           <h3>分类</h3>
           <ul class="widget">
-            <li><a href="">感想与观点（2）</a></li>
-            <li><a href="">技术篇（75）</a></li>
+            <li><a href="#">感想与观点（2）</a></li>
+            <li>
+              <a href="#">技术篇（{{ list.length }}）</a>
+            </li>
           </ul>
         </div>
         <div class="widget-wrap">
           <h3>阅读排行</h3>
           <ul class="widget">
-            <li><a href="">你好哦</a></li>
-            <li><a href="">wooo</a></li>
+            <li><a href="#">你好哦</a></li>
+            <li><a href="#">wooo</a></li>
           </ul>
         </div>
       </aside>
-      
     </div>
   </div>
 </template>
@@ -55,6 +54,49 @@ export default {
   name: "Home",
   components: {
     // HelloWorld,
+  },
+  data() {
+    return {
+      list: [],
+    };
+  },
+  created() {
+    this.getlist();
+  },
+  methods: {
+    // 跳转文章详情
+    todetail(data) {
+      this.$router.push({
+        name: "Detail",
+        params: {
+          data,
+        },
+      });
+    },
+    getlist() {
+      this.$axios({
+        url: "api/blog/list",
+      }).then((res) => {
+        if (res.data.errno == 0) {
+          this.list = res.data.data;
+        }
+      });
+    },
+    time(num) {
+      let d = new Date(num);
+      function addZero(num) {
+        if (num < 10) return "0" + num;
+        return num;
+      }
+      // 按自定义拼接格式返回
+      return (
+        d.getFullYear() +
+        "/" +
+        addZero(d.getMonth() + 1) +
+        "/" +
+        addZero(d.getDate())
+      ); 
+    },
   },
 };
 </script>
@@ -77,6 +119,12 @@ export default {
     width: 73.333333333%;
     margin: 0 0.833333333333333%;
     .article {
+      a {
+        color: #253f50;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
       margin: 50px 0;
       .article-inner {
         overflow: hidden;
