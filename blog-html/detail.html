@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <style>
+        #app {
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            height: 50px;
+            list-style: none;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ blog.title }}</h1>
+        <li>
+            <!-- <h2 href="">{{blog.title}}</h2> -->
+            <div><span>{{blog.author}}</span> 时间：{{time(blog.createtime)}} </div>
+        </li>
+        <div>
+            {{blog.content}}
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '博客详情',
+                blog: {}
+            },
+            created() {
+                let id = document.URL.split('=')[1];
+
+                axios.get(`http://localhost/api/blog/detail?id=${id}`)
+                    .then(res => {
+                        this.blog = res.data.data
+                    })
+            },
+            methods: {
+                login() {
+
+                },
+                time(num) {
+                    d = new Date(num)
+
+                    function addZero(num) {
+                        if (num < 10)
+                            return "0" + num;
+                        return num;
+                    }
+                    // 按自定义拼接格式返回
+                    return d.getFullYear() + "/" + addZero(d.getMonth() + 1) + "/" + addZero(d
+                        .getDate())
+                },
+            }
+        });
+    </script>
+</body>
+
+</html>

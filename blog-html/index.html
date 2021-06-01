@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客</title>
+    <style>
+        #app {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        ul li {
+            height: 40px;
+            list-style: none;
+            border-bottom: 1px solid #ccc;
+        }
+        ul li a{
+            margin: 3px;
+        }
+        ul li div{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <ul>
+            <li v-for="(item,index) in bolgList">
+                <a @click="to(item.id)" href="#">{{item.title}}</a>
+                <div><span>{{item.author}}</span> 时间：{{time(item.createtime)}} </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '博客首页',
+                bolgList: []
+            },
+            created() {
+                axios.get('http://localhost/api/blog/list')
+                    .then(res => {
+                        console.log(res.data)
+                        this.bolgList = res.data.data
+                    })
+            },
+            methods: {
+                time (num) {
+                    d = new Date(num)
+                    function addZero(num) {
+                        if (num < 10)
+                            return "0" + num;
+                        return num;
+                    }
+                    // 按自定义拼接格式返回
+                    return d.getFullYear() + "/" + addZero(d.getMonth() + 1) + "/" + addZero(d
+                        .getDate()) //+ "/" + addZero(d.getHours()) + " : " + addZero(d.getMinutes())
+                },
+                to(id){
+                    console.log(id)
+                    window.location.href = `http://localhost/detail.html?id=${id}`
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

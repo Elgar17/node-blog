@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理页面</title>
+    <style>
+        #app {
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        ul li {
+            height: 40px;
+            list-style: none;
+        }
+
+        .content {
+            border: 1px solid #ccc;
+        }
+
+        .list-header,
+        .list {
+            display: flex;
+            padding: 3px;
+            background-color: beige;
+        }
+
+        .list {
+            background-color: #fff;
+        }
+        .list div:hover{
+            cursor: pointer;
+        }
+
+        .blog-title,
+        .title {
+            flex: 7;
+        }
+
+        .oprition {
+            flex: 3;
+        }
+
+        .delte {
+            flex: 1.5;
+        }
+
+        .delte:hover {
+            cursor: pointer;
+        }
+
+        .edit {
+            flex: 1.5;
+        }
+
+        .edit:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <ul>
+            <a href="http://localhost/new.html">新建博客</a>
+        </ul>
+        <ul>
+            <li><span>搜索：</span><input v-model="keyword" type="text"> <button @click="search(keyword)">搜索</button> </li>
+
+        </ul>
+        <div class="content">
+            <div class="list-header">
+                <div class="blog-title">博客标题</div>
+                <div class="oprition">操作</div>
+            </div>
+            <div class="list" v-for="(item,index) in blog">
+                <div @click="to(item.id)" class="title">{{item.title}} </div>
+                <div @click="del(item.id)" class="delte">删除</div>
+                <div @click="edit(item.id)" class="edit">编辑</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '管理中心',
+                username: '',
+                password: '',
+                blog: [],
+                keyword:''
+            },
+            created() {
+                axios.get(`http://localhost/api/blog/list?isadmin=1`)
+                    .then(res => {
+                        console.log(res.data)
+                        this.blog = res.data.data
+                    })
+            },
+            methods: {
+                search(keyword) {
+                    axios.get(`http://localhost/api/blog/list?isadmin=1&keyword=${keyword}`)
+                    .then(res => {
+                        console.log(res.data)
+                        this.blog = res.data.data
+                    })
+                },
+                del(id) {
+                    console.log(id)
+                    var url = 'http://localhost/api/blog/del';
+                    var data = {
+                        id
+                    };
+                    fetch(url, {
+                            method: 'POST', // or 'PUT'
+                            body: JSON.stringify(data), // data can be `string` or {object}!
+                            headers: new Headers({
+                                'Content-Type': 'application/json'
+                            })
+                        }).then(res => res.json())
+                        .catch(error => console.error('Error:', error))
+                        .then(response => {
+                            if (response.errno == -1) {
+                                alert('添加失败！！')
+                                return
+                            }
+                            if (response.errno == 0) {
+                                alert('删除成功')
+                                window.location.href = 'http://localhost/admin.html'
+                            }
+                        });
+                },
+                edit(id) {
+                    console.log(id)
+                    window.location.href = `http://localhost/edit.html?id=${id}`
+                },
+                to(id) {
+                    window.location.href = `http://localhost/detail.html?id=${id}`
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

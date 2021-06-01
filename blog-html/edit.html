@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新建</title>
+    <style>
+        #app {
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        ul li {
+            height: 40px;
+            list-style: none;
+        }
+
+        input {
+            width: 77%;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .content div {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <ul>
+            <li><span>标题：</span><input v-model="title" type="text"> <button @click="add">新增</button></li>
+        </ul>
+        <div class="content">
+            <div>内容：</div>
+            <textarea name="" v-model="content" id="" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '编辑页面',
+                title: '',
+                content: '',
+                id: null
+            },
+            created(){
+                let id = document.URL.split('=')[1];
+                if(id){
+                    axios.get(`http://localhost/api/blog/detail?id=${id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        // this.blog = res.data.data
+                        this.title = res.data.data.title
+                        this.content = res.data.data.content
+                        this.id = id
+                    })
+                }
+            },
+            methods: {
+                add() {
+                    if (this.title.trim() != '' && this.content != '') {
+                        var url = 'http://localhost/api/blog/update';
+                        var data = {
+                            id: this.id,
+                            title: this.title,
+                            content: this.content
+                        };
+                        fetch(url, {
+                                method: 'POST', // or 'PUT'
+                                body: JSON.stringify(data), // data can be `string` or {object}!
+                                headers: new Headers({
+                                    'Content-Type': 'application/json'
+                                })
+                            }).then(res => res.json())
+                            .catch(error => console.error('Error:', error))
+                            .then(response => {
+                                console.log('Success:', response)
+                                if (response.errno == -1) {
+                                    alert('更新失败！！')
+                                    return
+                                }
+                                if (response.errno == 0) {
+                                    alert('更新成功')
+                                    window.location.href = 'http://localhost/admin.html'
+                                }
+                            });
+                    }
+                }
+            }
+        });
+    </script>
+    
+</body>
+
+</html>
